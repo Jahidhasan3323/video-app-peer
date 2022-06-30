@@ -10,6 +10,7 @@
         const ROOM_ID = "<%= roomId %>";
     </script>
     <script src="https://unpkg.com/peerjs@1.2.0/dist/peerjs.min.js"></script>
+<!--    <script src="https://cdnjs.cloudflare.com/ajax/libs/peerjs/1.2.0/peerjs.js"></script>-->
     <script src="/socket.io/socket.io.js"></script>
     <script src="/script.js"></script>
     <style>
@@ -29,6 +30,7 @@
 <body>
 
 <div id="video-grid"></div>
+<button type="button" onclick="endCall(ROOM_ID, 10)">close</button>
 <p>hello</p>
 </body>
 </html>

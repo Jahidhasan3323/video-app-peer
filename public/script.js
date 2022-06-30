@@ -1,9 +1,8 @@
+//peer js script
 const socket = io('/')
 const videoGrid = document.getElementById('video-grid');
-const myPeer = new Peer(undefined, {
-    host: '/',
-    port: '3001'
-})
+
+const myPeer = new Peer()
 
 const myVideo = document.createElement('video');
 myVideo.muted = true;
@@ -23,10 +22,13 @@ navigator.mediaDevices.getUserMedia({
     })
     socket.on('user-disconnected', userId => {
         if(peers[userId]) peers[userId].close()
+        
     })
     socket.on('user-connected', userId => {
         connectNewUser(userId, stream)
     })
+}).catch(error =>{
+    console.log('dkjd', error)
 })
 
 
@@ -55,3 +57,19 @@ function addVideoStream(video, stream) {
     console.log(videoGrid)
     videoGrid.append(video)
 }
+
+// let endCall = () => myVideo.srcObject.getTracks().forEach(track => track.stop())
+function endCall(roomId, userId){
+    console.log('djkdj', roomId, userId);
+    myVideo.srcObject.getTracks().forEach(track => track.stop())
+    /*myPeer.on('open', id => {
+        console.log(id,'yuy')
+        socket.to(roomId).emit('user-disconnected', id)
+    })*/
+    socket.to(roomId).emit('user-disconnected', userId)
+}
+
+//other script
+
+//copy room id
+

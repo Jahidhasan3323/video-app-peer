@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!-- CSS only -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"  crossorigin="anonymous">
+    <title>Document</title>
+</head>
+<body>
+<section class="mt-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="card ">
+                    <div class="card-header bg-info text-white">
+                        Your Room Info:
+                    </div>
+                    <div class="card-body">
+                        <ul class="list-group">
+                            <li class="list-group-item">Room Id:
+                                <badge  class="float-end badge bg-danger" role="button" onclick="copyRoomId()">Copy <ion-icon name="accessibility-outline"></ion-icon></badge>
+                                <span class="badge bg-info float-end" id="room-id"><%= roomId %></span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card ">
+                    <div class="card-header bg-info text-white">
+                        Join Room
+                    </div>
+                    <div class="card-body">
+                        <form class="row g-3" >
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control " placeholder="Room Id" id="join-room-id">
+                            </div>
+                            <div class="col-sm-2">
+                                <button type="button" onclick="joinRoom()" class="btn btn-info text-white" >Join</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- JavaScript Bundle with Popper -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"  crossorigin="anonymous"></script>
+<script >
+function copyRoomId(){
+    const getRoomId =  document.getElementById('room-id').textContent;
+    navigator.clipboard.writeText(getRoomId)
+}
+function joinRoom(){
+    const roomId = document.getElementById('join-room-id').value;
+    if (!roomId){
+        alert('Room Id missing');
+        return
+    }
+    window.open(`${'<%= baseURL %>'}/room/${roomId}`, '_blank');
+}
+</script>
+</body>
+</html>
