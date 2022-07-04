@@ -30,12 +30,13 @@ io.on('connection', (socket) => {
         socket.to(roomId).emit('user-connected', userId);
         socket.on('disconnect', () => {
             socket.to(roomId).emit('user-disconnected', userId)
-        })
+        });
     })
+
 });
 
-// server.listen(3000,  () => {
-server.listen(3000, '192.168.1.38', () => {
+server.listen(3000,  () => {
+// server.listen(3000, '192.168.1.38', () => {
     console.log('listening on *:3000');
 });
 app.locals.baseURL = "https://192.168.1.38:3000"
